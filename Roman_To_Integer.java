@@ -27,11 +27,14 @@ class Solution {
             }
         }
         for (int i = 0; i < s.length() - 1; i++) {
-            if (s.charAt(i) == 'I' && (s.charAt(i + 1) == 'V' || s.charAt(i + 1) == 'X')) {
+            if ((s.charAt(i) == 'I' && s.charAt(i + 1) == 'V') ||
+                    (s.charAt(i) == 'I' && s.charAt(i + 1) == 'X')) {
                 a = a - 2;
-            } else if ((s.charAt(i) == 'X' && (s.charAt(i + 1) == 'L') || s.charAt(i + 1) == 'C')) {
+            } else if ((s.charAt(i) == 'X' && s.charAt(i + 1) == 'L') ||
+                    (s.charAt(i) == 'X' &&s.charAt(i + 1) == 'C')) {
                 a = a - 20;
-            } else if ((s.charAt(i) == 'C' && (s.charAt(i + 1) == 'D') || s.charAt(i + 1) == 'M')) {
+            } else if ((s.charAt(i) == 'C' && s.charAt(i + 1) == 'D') ||
+                    (s.charAt(i) == 'C' && s.charAt(i + 1) == 'M')) {
                 a = a - 200;
             }
         }
