@@ -18,7 +18,7 @@ class Solution {
 public boolean isPalindrome(String s, int begin, int end) {
   if (begin < 0) return false;
   while (begin < end) {
-    if(s.charAt(begin++)!=s.charAt(end--)) return false;
+    if(s.charAt(begin++) != s.charAt(end--)) return false;
   }
   return true;
 }
