@@ -1,6 +1,5 @@
 class Solution {
     public String[] findRestaurant(String[] list1, String[] list2) {
-        int len = 0;
         int min = Integer.MAX_VALUE;
         String[] list3 = new String[len];
 
