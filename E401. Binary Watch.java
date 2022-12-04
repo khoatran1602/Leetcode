@@ -4,8 +4,7 @@ class Solution {
         for (int hour = 0; hour < 12; hour++) {
             for (int min = 0; min < 60; min++) {
                 if (Integer.bitCount(hour) + Integer.bitCount(min) == turnedOn) {
-                    if (min < 10) res.add(String.format("%d:0%d", hour, min));
-                    else res.add(String.format("%d:%d", hour, min));
+                    res.add(String.format("%d:%02d", hour, min));
                 }
             }
         }
