@@ -10,12 +10,9 @@ public class Solution {
                     int index2 = end - 1;
                     int s = nums[i] + nums[end];
                     if (s > target && nums[i] > 0 || s < target && nums[end] < 0) {
-
                         break;
                     }
-
                     while (index1 < index2) {
-
                         int sum = nums[index1] + nums[index2] + nums[i] + nums[end];
                         if (sum == target) {
                             List<Integer> list = new ArrayList<Integer>();
@@ -23,12 +20,8 @@ public class Solution {
                             list.add(nums[index1]);
                             list.add(nums[index2]);
                             list.add(nums[end]);
-
-                            // set.add(list);
                             res.add(list);
-
                             while (nums[index2] == nums[index2 - 1] && index2 > index1) index2--;
-                            ;
                             index1++;
                             index2--;
                         } else if (sum < target) {
@@ -36,8 +29,6 @@ public class Solution {
                         } else {
                             index2--;
                         }
-
-
                     }
                     while (nums[end] == nums[end - 1] && i < end - 2) end--;
                     end--;
@@ -45,7 +36,6 @@ public class Solution {
                 }
             }
         }
-
         return res;
     }
 }
