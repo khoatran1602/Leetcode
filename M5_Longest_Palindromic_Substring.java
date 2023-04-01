@@ -6,8 +6,7 @@ class Solution {
       if(isPalindrome(s, i - maxLength - 1, i)) { // Check if a palindrome centered at i with length maxLength+1 exists
         longestPalindrome = s.substring(i - maxLength - 1, i + 1); // Update longestPalindrome to the new palindrome
         maxLength += 2; // Update maxLength to reflect the new longest palindrome found
-      }
-      else if(isPalindrome(s, i - maxLength, i)){ // Check if a palindrome centered at i with length maxLength exists
+      } else if(isPalindrome(s, i - maxLength, i)){ // Check if a palindrome centered at i with length maxLength exists
         longestPalindrome = s.substring(i - maxLength, i + 1); // Update longestPalindrome to the new palindrome
         maxLength += 1; // Update maxLength to reflect the new longest palindrome found
       }
