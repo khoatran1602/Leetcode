@@ -1,3 +1,5 @@
+import java.util.List;
+
 class Solution {
     public List<String> summaryRanges(int[] nums) {
         List<String> list = new ArrayList<>();
