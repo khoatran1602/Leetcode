@@ -1,34 +1,66 @@
 import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Comparator;
 
+/**
+ * Solution class for finding the maximum length of a pair chain
+ * A pair chain is created where for each consecutive pair (a,b) and (c,d), b < c
+ */
 class Solution {
+    /**
+     * Finds the longest chain that can be formed from the given pairs
+     * @param pairs 2D array containing pairs of integers where pairs[i] = [left_i, right_i]
+     * @return The length of the longest chain
+     */
     public int findLongestChain(int[][] pairs) {
+        // Sort pairs based on the second element (right boundary) for greedy approach
         Arrays.sort(pairs, Comparator.comparingInt(a -> a[1]));
+        
+        // Debug print to show sorted pairs
         System.out.println(Arrays.deepToString(pairs));
-        int[] temp = new int[pairs.length];
-        int threshold = pairs[0][1];
-        temp[0] = pairs[0][1];
-        int len = 1;
+        
+        // Array to store the right boundaries of selected pairs
+        int[] chainEndings = new int[pairs.length];
+        
+        // Initialize with the first pair's right boundary
+        int currentEnd = pairs[0][1];
+        chainEndings[0] = pairs[0][1];
+        int chainLength = 1;  // Counter for chain length
+
+        // Iterate through remaining pairs
         for (int i = 1; i < pairs.length; i++) {
-            System.out.println("Threshold: " + threshold);
+            // Debug prints
+            System.out.println("Current End: " + currentEnd);
             System.out.println("Pairs[i][0]: " + pairs[i][0]);
-            if (pairs[i][0] > threshold) {
-                temp[len++] = pairs[i][1];
-                threshold = pairs[i][1];
+            
+            // If current pair's left boundary is greater than previous right boundary
+            // it can be added to the chain
+            if (pairs[i][0] > currentEnd) {
+                chainEndings[chainLength++] = pairs[i][1];  // Store the right boundary
+                currentEnd = pairs[i][1];    // Update current end
             }
         }
-        System.out.println("Length: " + len);
-        System.out.println(Arrays.toString(temp));
-        HashSet<Integer> set = new HashSet<>();
-        for (int i = 0; i < temp.length; i++) {
-            set.add(temp[i]);
+
+        // Debug prints
+        System.out.println("Chain Length: " + chainLength);
+        System.out.println(Arrays.toString(chainEndings));
+        
+        // Create set to store unique right boundaries
+        HashSet<Integer> uniqueEndings = new HashSet<>();
+        for (int i = 0; i < chainEndings.length; i++) {
+            uniqueEndings.add(chainEndings[i]);
         }
-        set.remove(0);
-        return set.size();
+        
+        // Return size of set which represents chain length
+        return uniqueEndings.size();
     }
 
+    /**
+     * Main method for testing the solution
+     */
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[][] pairs = {{1,2}, {2,3}, {3,4}};
+        int[][] pairs = {{1,2}, {2,3}, {3,4}};  // Test case
         System.out.println(sol.findLongestChain(pairs));
     }
 }
