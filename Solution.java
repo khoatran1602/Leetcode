@@ -9,4 +9,10 @@ public class Solution {
         }
         return num;
     }
+
+    public static void main(String[] args) {
+        // Test cases
+        Solution sol = new Solution();
+        System.out.println(sol.reverseBits(43261596));  // Expected: 964176192
+    }
 }

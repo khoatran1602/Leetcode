@@ -1,16 +1,15 @@
-import java.util.HashSet;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 
 /**
  * Solution class for finding the maximum length of a pair chain
- * A pair chain is created where for each consecutive pair (a,b) and (c,d), b < c
  */
 class Solution {
     /**
      * Finds the longest chain that can be formed from the given pairs
-     * @param pairs 2D array containing pairs of integers where pairs[i] = [left_i, right_i]
-     * @return The length of the longest chain
+     * @param pairSequence 2D array containing pairs where each pair is [start, end]
+     * @return The length of the longest valid chain
      */
     public int findLongestChain(int[][] pairs) {
         // Sort pairs based on the second element (right boundary) for greedy approach

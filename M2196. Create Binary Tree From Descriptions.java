@@ -1,4 +1,20 @@
+
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
 class Solution {
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+    
     public TreeNode createBinaryTree(int[][] descriptions) {
         // Create a map to store nodes and their parent-child relationships
         HashMap<Integer, TreeNode> map = new HashMap<>();
