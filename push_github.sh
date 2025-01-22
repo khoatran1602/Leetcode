@@ -17,4 +17,3 @@ git push origin master
 
 # print a message to the user
 echo "Changes pushed to GitHub successfully"
-```
