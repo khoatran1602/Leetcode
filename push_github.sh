@@ -19,7 +19,7 @@ git add .
 git commit -m "$1"
 
 # push the changes to the remote repository
-git push origin master
+git push origin main
 
 # print a message to the user
 echo "Changes pushed to GitHub successfully"
