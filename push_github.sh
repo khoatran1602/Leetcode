@@ -6,6 +6,12 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
+# check if there is any change to commit
+if [ -z "$(git status --porcelain)" ]; then
+    echo "No changes to commit"
+    exit 1
+fi
+
 # add all the files in the current directory to the staging area
 git add .
 
