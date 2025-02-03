@@ -36,7 +36,7 @@ class Solution {
         
         // If we land exactly at the last position, it must be a one-bit character
         return i == bits.length - 1; // true if last character is one-bit
-    }
+    } 
     
     /**
      * Main method for testing the solution with example test cases
