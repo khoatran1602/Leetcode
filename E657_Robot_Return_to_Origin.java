@@ -1,53 +1,40 @@
 /**
  * LeetCode 657 - Robot Return to Origin
- * Problem: Determine if a robot returns to its original position after a sequence of moves
- * Time Complexity: O(n) where n is the length of moves string
+ * Problem: Determine if robot returns to starting position after sequence of moves
+ * Time Complexity: O(n) where n is length of moves string
  * Space Complexity: O(1)
  */
 class Solution {
     /**
-     * Determines if the robot returns to its starting position after executing all moves
-     * @param moves A string containing the moves: 'U' (up), 'D' (down), 'L' (left), 'R' (right)
-     * @return true if robot returns to origin, false otherwise
+     * Determines if robot returns to origin after executing moves
+     * @param moves String of moves: 'U'(up), 'D'(down), 'L'(left), 'R'(right)
+     * @return true if robot returns to origin (0,0)
      */
     public boolean judgeCircle(String moves) {
-        // Track coordinates: (0,0) is the starting position
-        int horizontalPosition = 0;  // x-coordinate
-        int verticalPosition = 0;    // y-coordinate
+        int x = 0;  // x-coordinate: positive = right, negative = left
+        int y = 0;  // y-coordinate: positive = up, negative = down
 
-        // Process each move in the sequence
+        // Process each move and update position
         for (int i = 0; i < moves.length(); i++) {
             char direction = moves.charAt(i);
-            
-            // Update position based on movement direction
             switch (direction) {
-                case 'U':    // Move Up
-                    verticalPosition++;
-                    break;
-                case 'D':    // Move Down
-                    verticalPosition--;
-                    break;
-                case 'L':    // Move Left
-                    horizontalPosition--;
-                    break;
-                case 'R':    // Move Right
-                    horizontalPosition++;
-                    break;
+                case 'U': y++;   break;  // Move up
+                case 'D': y--;   break;  // Move down
+                case 'L': x--;   break;  // Move left
+                case 'R': x++;   break;  // Move right
             }
         }
-
-        // Robot returns to origin only if both coordinates are 0
-        return horizontalPosition == 0 && verticalPosition == 0;
+        
+        // Check if robot returned to origin (0,0)
+        return x == 0 && y == 0;
     }
-    
+
     /**
      * Main method for testing the solution
      */
     public static void main(String[] args) {
         Solution sol = new Solution();
-        
-        // Test cases
-        System.out.println("Test case 1 (UD): " + sol.judgeCircle("UD"));  // Should print true
-        System.out.println("Test case 2 (LL): " + sol.judgeCircle("LL"));  // Should print false
+        System.out.println("Test case 1 (\"UD\"): " + sol.judgeCircle("UD"));  // Expected: true
+        System.out.println("Test case 2 (\"LL\"): " + sol.judgeCircle("LL"));  // Expected: false
     }
 }
