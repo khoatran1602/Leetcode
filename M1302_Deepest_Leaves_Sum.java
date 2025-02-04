@@ -52,7 +52,8 @@ class Solution {
      * @return The sum of values of the deepest leaves, 0 if tree is empty
      */
     public int deepestLeavesSum(TreeNode root) {
-        if (root == null) return 0;
+        if (root == null)
+            return 0;
 
         // Initialize queue for level-order traversal
         Queue<TreeNode> queue = new java.util.LinkedList<>();
@@ -62,12 +63,12 @@ class Solution {
         // Process the tree level by level
         while (!queue.isEmpty()) {
             int nodesInCurrentLevel = queue.size();
-            sum = 0;  // Reset sum for current level
+            sum = 0; // Reset sum for current level
 
             // Process all nodes at current level
             for (int i = 0; i < nodesInCurrentLevel; i++) {
                 TreeNode currentNode = queue.poll();
-                sum += currentNode.val;  // Add current node's value to level sum
+                sum += currentNode.val; // Add current node's value to level sum
 
                 // Add children to queue for next level processing
                 if (currentNode.left != null) {
@@ -83,6 +84,59 @@ class Solution {
         return sum;
     }
     
+    /**
+     * Alternative recursive approach to find the sum of deepest leaves.
+     * This approach first finds the maximum depth of the tree, then
+     * sums up all nodes at that depth.
+     * 
+     * Time Complexity: O(N) - visits each node twice
+     * Space Complexity: O(H) - where H is the height of the tree (recursion stack)
+     * 
+     * @param root The root node of the binary tree
+     * @return The sum of values of the deepest leaves
+     */
+    public int deepestLeavesSum_recursive_approach(TreeNode root) {
+        int maxDepth = maxDepth(root);
+        return deepestLeavesSum(root, 1, maxDepth);
+    }
+
+    /**
+     * Helper method to find the maximum depth of the tree.
+     * 
+     * @param root The root node of the current subtree
+     * @return The maximum depth of the tree
+     */
+    private int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    }
+
+    /**
+     * Helper method to sum values of nodes at the maximum depth.
+     * 
+     * @param root The current node being processed
+     * @param currentDepth The depth of the current node
+     * @param maxDepth The maximum depth of the tree
+     * @return The sum of values of nodes at maxDepth in this subtree
+     */
+    private int deepestLeavesSum(TreeNode root, int currentDepth, int maxDepth) {
+        // Base case: null node
+        if (root == null) {
+            return 0;
+        }
+        
+        // When we reach the target depth, return the node's value
+        if (currentDepth == maxDepth) {
+            return root.val;
+        }
+        
+        // Recursively process left and right subtrees
+        return deepestLeavesSum(root.left, currentDepth + 1, maxDepth) +
+               deepestLeavesSum(root.right, currentDepth + 1, maxDepth);
+    }
+
     /**
      * Main method for testing the solution with example test cases
      */
