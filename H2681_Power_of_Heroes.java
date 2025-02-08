@@ -1,24 +1,43 @@
 import java.util.Arrays;
 
+/**
+ * LeetCode 2681 - Power of Heroes
+ * Time Complexity: O(n log n) due to sorting
+ * Space Complexity: O(1) as we only use constant extra space
+ */
 class Solution {
+    // Constant for modulo operations to prevent overflow
+    private static final long MOD = 1_000_000_007;
+    
+    /**
+     * Calculates the sum of power for all possible hero combinations
+     * Power = min(subset) * max(subset)^2 for each possible subset
+     * @param nums Array of hero power values
+     * @return Sum of power for all possible combinations
+     */
     public int sumOfPower(int[] nums) {
-        // Sort array to handle min/max efficiently
+        // Sort to efficiently handle min/max calculations
         Arrays.sort(nums);
         
         long result = 0;
+        // minSum keeps track of possible minimum values contribution
         long minSum = 0;
-        long mod = 1_000_000_007;
         
-        // For each number as potential maximum
+        // Process each number as a potential maximum value
         for (int i = 0; i < nums.length; i++) {
-            // Calculate power: max^2 * min
-            result = (result + (((long) nums[i] * nums[i]) % mod) * minSum) % mod;
-            // Add current number as max^2 * itself as min
-            result = (result + ((long) nums[i] * nums[i] % mod) * nums[i]) % mod;
+            long currentNum = nums[i];
+            // Square of current number (potential maximum)
+            long squaredNum = (currentNum * currentNum) % MOD;
             
-            // Update minSum for next iteration
-            // Each previous number can be minimum, multiply by 2 for next position
-            minSum = (minSum * 2 + nums[i]) % mod;
+            // Add contribution of all previous minimums with current maximum
+            result = (result + (squaredNum * minSum) % MOD) % MOD;
+            // Add contribution when current number is both min and max
+            result = (result + (squaredNum * currentNum) % MOD) % MOD;
+            
+            // Update minSum for next iteration:
+            // - Multiply previous minSum by 2 (as each previous min can be used twice)
+            // - Add current number as a new possible minimum
+            minSum = (minSum * 2 + currentNum) % MOD;
         }
         
         return (int) result;
