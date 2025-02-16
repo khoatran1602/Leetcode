@@ -31,6 +31,7 @@ class Solution {
             
             // Add contribution of all previous minimums with current maximum
             result = (result + (squaredNum * minSum) % MOD) % MOD;
+            
             // Add contribution when current number is both min and max
             result = (result + (squaredNum * currentNum) % MOD) % MOD;
             
