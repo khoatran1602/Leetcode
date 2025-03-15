@@ -1,27 +1,36 @@
 class Solution {
-  public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-      int isTen = 0;
-      int sum = 0;
-      ListNode dummy = new ListNode(0);
-      ListNode curr = dummy;
-      while (l1.next != null || l2.next != null || isTen != 1) {
-        if (l1.next != null) {
-          sum = sum + l1.val;
-          l1 = l1.next;
+  public int[] solution(String recipients, int[] amounts) {
+    int minA = 0;
+    int minB = 0;
+
+    int balA = 0;
+    int balB = 0;
+
+    for (int i = 0; i < recipients.length(); i++) {
+      if (recipients.charAt(i) == 'A') {
+        balA += amounts[i];
+        balB -= amounts[i];
+        if (balB < minB) {
+          minB = balB;
         }
-        if (l2.next != null) {
-          sum = sum + l2.val;
-          l2 = l2.next;
+      } else if (recipients.charAt(i) == 'B') {
+        balB += amounts[i];
+        balA -= amounts[i];
+        if (balA < minA) {
+          minA = balA;
         }
-        sum = sum + isTen;
-        if (sum >= 10) isTen = 1;
-        ListNode node = new ListNode(sum % 10);
-        curr.next = node;
-        curr = curr.next;
-        sum = 0;
       }
-      return dummy.next();
     }
+
+    return new int[] { -minA, -minB };
+  }
+    
+  public static void main(String[] args) {
+    Solution solution = new Solution();
+    String recipients = "ABAB";
+    int[] amounts = { 1, 2, 3, 4 };
+    int[] result = solution.solution(recipients, amounts);
+    System.out.println("Minimum amount for A: " + result[0]);
+
   }
 }
-

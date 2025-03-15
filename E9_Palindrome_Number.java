@@ -1,33 +1,51 @@
 class Solution {
     public boolean isPalindrome(int x) {
-       if ( x < 0) {
+        // Negative numbers cannot be palindromes
+        if (x < 0) {
             return false;
         }
-      //Assign x = z so when we divide x by 10 later then we still have one more number to compare.
-        int z = x;
-        int y = 0;
+        
+        // Store original number since we'll modify x during reversal
+        int originalNumber = x;
+        int reversedNumber = 0;
+        
+        // Reverse the number by building it digit by digit
         while (x != 0) {
-            y = y * 10 + x % 10;
+            // Get the last digit
+            int lastDigit = x % 10;
+            
+            // Build reversed number: multiply by 10 to shift left and add last digit
+            reversedNumber = reversedNumber * 10 + lastDigit;
+            
+            // Remove the last digit from original number
             x = x / 10;
         }
-        if (z == 0 || z == y) {
-            return true;
-        } else {
-            return false;
-        }
+        
+        // Number is palindrome if original equals reversed
+        // Note: 0 is also a palindrome
+        return originalNumber == 0 || originalNumber == reversedNumber;
     }
 }
 -----------------------------------------------------------------------------------------------------
 class Solution {
-  public boolean isPalindrome(int x) {
-    String y = String.valueOf(x);
-    int start = 0;
-    int end = y.length() - 1;
-    // We don't have to have "=" (start <= end) because when there is one number, it is palindrome.
-    while (start < end) {
-      if (y.charAt(start++) != y.charAt(end--)) return false;
+    public boolean isPalindrome(int x) {
+        // Convert integer to string for easier character comparison
+        String numStr = String.valueOf(x);
+        
+        // Use two pointers: one from start, one from end
+        int leftPointer = 0;
+        int rightPointer = numStr.length() - 1;
+        
+        // Compare characters from both ends moving towards center
+        while (leftPointer < rightPointer) {
+            // If characters don't match, it's not a palindrome
+            if (numStr.charAt(leftPointer++) != numStr.charAt(rightPointer--)) {
+                return false;
+            }
+        }
+        
+        // If we made it through the loop, it's a palindrome
+        return true;
     }
-    return true;
-  }
 }
 -------------------------------------------------------------------------------
