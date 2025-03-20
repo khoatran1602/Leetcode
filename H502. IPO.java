@@ -1,3 +1,8 @@
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 class Solution {
     public int findMaximizedCapital(int numProjects, int initialCapital, int[] profits, int[] capital) {
         // Create a 2D array to store project information (capital and profit)

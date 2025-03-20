@@ -21,7 +21,7 @@
  * 2. A=[1,2,2,2,5,5,5,8] → return 4
  * 3. A=[1,1,1,1,3,3,4,4,4,4,4] → return 5
  * 4. A=[10,10,10] → return 3
- */
+ */ 
 
 /**
  * Solution for array frequency adjustment problem.
